@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa Eletrõnico</title>
+    <script>
+
+        var nome = prompt("Por favor, me diga seu nome.");
+        alert("Olá, " + nome + "! É um prazer te receber em nosso banco.");
+
+        var saldo = 100.0;
+        var senha = 3589;
+        var numero_da_conta;
+
+        function menu(){ // menu OK
+
+            var escolha = parseInt(prompt("O que você deseja fazer? 1)Saldo / 2) Extrato / 3)Saque / 4)Depósito / 5)Tranferência / 6)Sair / "));
+
+            switch (escolha){
+                case 1:
+                     ver_saldo(); //saldo OK
+                    break;
+                case 2:
+                     ver_extrato();
+                    break;
+                case 3:
+                     fazer_saque(); //fazer saque OK 
+                     break;
+                case 4:
+                    fazer_deposito(); //fazer depósito OK
+                    break;
+                case 5:
+                    fazer_transferencia(); // fazer transferencia OK
+                    break;
+                case 6:
+                    sair_do_banco(); // sair OK
+                    break;
+                default:
+                    alert("Essa opção não existe.");
+            }
+        }
+
+        function ver_saldo(){
+            var senha = parseInt(prompt("Insira a sua senha, para poder ver seu saldo atual."))
+            
+            if(senha == 3589){
+            alert( "Seu saldo atual é " + saldo);
+            menu();
+            }
+            else{
+                alert("Senha incorreta. Tente novamente");
+                ver_saldo();
+            }
+        }
+
+        function ver_extrato(){
+            if(senha == 3589){
+                var extrato = [ "Mini-Extra: 30.00 ", "Cantina do Senac: 15.00 ", "Lojas Renner: 49.90 "];
+                alert(extrato);
+                menu();
+            }
+        }; 
+
+        function fazer_saque(){
+
+            var senha = parseInt(prompt("Insira a sua senha, por favor."))
+
+            if( senha == 3589){
+            var saque = parseInt(prompt("Qual valor você deseja sacar?"));
+            }
+
+            if( saque <= 0|| saque > saldo ){
+                alert("Não é possível sacar esse valor");
+                fazer_saque();
+            }
+            else if(isNaN (saque) || saque ===''){
+                alert("Por favor, informe um número verdadeiro.");
+                fazer_saque()
+            }
+            else{
+                saldo = saldo - saque;
+                ver_saldo();
+                menu();
+            };
+            
+
+        };
+
+        function fazer_deposito(){
+            var senha = parseInt(prompt("Insira a sua senha, por favor."));
+
+            if( senha == 3589){
+               var deposito = parseInt(prompt("Qual o valor do depósito?"));
+            }
+            else{
+                alert("Senha Incorreta. Tente novamente.")
+                fazer_deposito();
+            }
+
+            if (deposito <= 0){
+              alert("Não é possível realizar esse depósito. Tente novamente.");
+              fazer_deposito();
+            }
+
+            else{ saldo = saldo + deposito;
+               ver_saldo();
+               menu();
+            }
+            
+          
+
+        };
+
+        function fazer_transferencia(){
+             var senha = parseInt(prompt("Insira a sua senha por favor."));
+             if( senha = 3589){
+                var numero_da_conta = parseInt(prompt("Qual o número da conta para a qual você deseja fazer transferência? "));
+             }
+             else{
+                alert("Senha incorreta. Tente novamente.");
+                fazer_transferencia();
+             }
+            if(numero_da_conta){
+                var transferencia = parseInt(prompt("Qual o valor que você deseja tranferir para essa conta?"));
+                saldo = saldo - transferencia;
+                ver_saldo();
+                menu();
+            }
+            else{
+                alert("Essa conta não existe. Insira o número de uma conta válida.");
+                fazer_tranferencia();
+            }
+
+            
+        };
+
+        function sair_do_banco(){
+            var sair = confirm("Você realmente deseja sair do banco?"); // confirm = caixinha de OK(v) ou cancelar(f)
+            if(sair){
+                alert( nome + ", agradecemos por utilizar os serviços do nosso banco. Foi um prazer ter você aqui." );
+                window.close(); //fecha a janela do navegador
+            }
+            else{
+                menu();
+            }
+        };
+
+     menu();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
